@@ -1,0 +1,104 @@
+# ==========================================
+# Node.js Dependencies
+# ==========================================
+node_modules/
+
+# ==========================================
+# Playwright Test Results and Reports
+# ==========================================
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# ==========================================
+# Screenshots, Videos, Traces and Artifacts
+# ==========================================
+*.webm
+*.zip
+*.trace
+
+# ==========================================
+# Environment Variables and Secrets
+# ==========================================
+.env
+.env.*
+!.env.example
+
+# ==========================================
+# Authentication State and Session Data
+# ==========================================
+playwright/.auth/
+.storage/
+storage-state.json
+auth.json
+
+# ==========================================
+# Logs and Debug Output
+# ==========================================
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# ==========================================
+# Code Coverage
+# ==========================================
+coverage/
+
+# ==========================================
+# IDE Metadata
+# ==========================================
+
+# Visual Studio Code
+.vscode/
+
+# IntelliJ IDEA and WebStorm
+.idea/
+*.iml
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# ==========================================
+# Operating System Files
+# ==========================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# ==========================================
+# Temporary Files
+# ==========================================
+tmp/
+temp/
+*.tmp
+*.bak
+
+# ==========================================
+# Local Environment and Tool Caches
+# ==========================================
+.eslintcache
+.stylelintcache
+.parcel-cache/
+.cache/
