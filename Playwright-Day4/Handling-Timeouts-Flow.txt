@@ -1,0 +1,97 @@
+Handling Timeouts
+
+In this we will understand how can we achieve Test Timeout Exceeded Expection
+
+
+--------------------------------------------------
+
+01. In this we will have a demo test where we will intentionally have timeout
+
+import {test, expect} from '@playwright/test'
+
+test('Handling Timeout Demo1', async ({page})=>{
+
+
+    await page.goto('https://playground.bondaracademy.com/pages/iot-dashboard');
+
+    await page.getByText('Formss').click();
+
+
+    await page.waitForTimeout(5000);
+
+
+    // Here you will get
+    // Test timeout of 30000ms exceeded.
+    // because intentionally we added wrong locator here getByText('Formss')
+})
+
+=================================================================
+
+
+02. Lets understand from where this 30000ms is coming from and why do we have this error
+
+- 30000ms is a default timeout in playwright to execute a single test
+- This is the maximum time a playwright gives you to run a test.
+
+- When element is not found playwright will wait upto the test timeout limit 
+  and then if its not available it will throw error.
+
+- In the error you can see 2 options
+    a. Error: In my case its locator.click: Test timeout of 30000ms exceeded.
+
+    b. And the main part
+        Call log:
+            - waiting for getByText('Formss')
+
+            Here Playwright will tell what it is trying to do, and during this
+            process something went wrong
+
+
+=================================================================
+
+
+03. How to Fix the error
+
+    a. Approach 1
+
+        - Goto the playwright configuration file and in the export default defineConfig
+          section type
+            timeout: 60000      // Increase from 30000ms to 60000ms
+
+            It is Global Framework level
+
+        - But we can also configure it per test level.
+          Inside our spec.js file add this after test block
+          test.setTimeout(60000);
+
+    
+    b. Approach 2
+
+        - Sometimes some tests will run for minutes and if some error occurs during that
+          we need to wait for minutes, but i dont want like that the test can run of minutes
+          but if any error occurs we should be notified 
+
+            - Goto Playwright config file 
+              Inside it goto the use block add the below
+                actionTimeout: 2000
+            
+
+            - Full use code
+
+                    use: {
+                        /* Base URL to use in actions like `await page.goto('')`. */
+                        // baseURL: 'http://localhost:3000',
+
+                        /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+                        trace: 'on-first-retry',
+
+                        actionTimeout: 2000,
+                    },
+        
+
+        - actionTimeout is nothing but this is the maxium time you have to wait to
+          perform an action, for example click or any other action operation
+
+        - and it that is not happen then we will have an error.
+    
+
